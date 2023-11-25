@@ -1,5 +1,1 @@
-// TO TEACH
-
-import { writable } from "svelte/store";
-
-export const isLoggedIn = writable(false);
+// (1) TODO: Implement global state to check is user loggedIn.

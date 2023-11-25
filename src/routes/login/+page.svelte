@@ -1,24 +1,17 @@
 <script>
-  import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+  // (1) TODO: Imports Firebase
 
-  const auth = getAuth();
+  // (2) TODO: Init Firebase auth.
 
   let email = "";
   let password = "";
 
   const handleLogin = () => {
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        localStorage.setItem("uid", user.uid);
-        localStorage.setItem("email", user.email || "");
-        window.location.href = "/";
-      })
-      .catch((error) => {
-        alert(error);
-      });
+    // (3) TODO: Handle login
   };
 </script>
+
+<!-- THIS BOILERPLATE / UI CODE ARE CREATED AS PART OF THIS WORKSHOP DO NOT EDIT OR MODIFIED THIS CORD BELOW  -->
 
 <div class="flex flex-col items-center justify-center min-h-screen">
   <div class="flex flex-row gap-4">

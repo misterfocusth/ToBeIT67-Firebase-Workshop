@@ -1,110 +1,38 @@
 <script>
-  // @ts-nocheck
-  import {
-    addDoc,
-    collection,
-    doc,
-    getDocs,
-    getFirestore,
-    updateDoc,
-    deleteDoc,
-    where,
-    query,
-  } from "firebase/firestore";
+  // (1) TODO: Imports firebase.
+
   import { onMount } from "svelte";
 
-  // Firestore
-  const db = getFirestore();
+  // (2) TODO: Init Firesotre DB.
 
   let userId = "";
   let newToDo = "";
+  let newValue = "";
 
   let todos = [];
 
   onMount(async () => {
-    userId = localStorage.getItem("uid");
-    const queryOption = query(collection(db, "todos"), where("userId", "==", userId));
-    const querySnapshot = await getDocs(queryOption);
-    const currentToDos = [];
-    querySnapshot.forEach((doc) => {
-      currentToDos.push({
-        id: doc.id,
-        ...doc.data(),
-        createdAt: doc.data().createdAt.toDate(),
-        updatedAt: doc.data().updatedAt.toDate(),
-      });
-    });
-    todos = [...currentToDos];
+    // (3) TODO: Handle load user todos.
   });
 
-  let newValue = "";
-
   const handleAddNewToDo = () => {
-    if (!newToDo) return;
-
-    const newToDoData = {
-      userId,
-      content: newToDo,
-      isDone: false,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    };
-
-    addDoc(collection(db, "todos"), newToDoData)
-      .then((doc) => {
-        todos = [...todos, { ...newToDoData, id: doc.id }];
-        newToDo = "";
-      })
-      .catch((error) => {
-        alert(error);
-      });
+    // (4) TODO: Handle add new todo.
   };
 
   const handleSave = (id) => {
-    if (!newValue) return;
-
-    const docRef = doc(db, "todos", id);
-    updateDoc(docRef, { content: newValue })
-      .then(() => {
-        const targetIndex = todos.findIndex((todo) => todo.id === id);
-        todos[targetIndex] = {
-          ...todos[targetIndex],
-          content: newValue,
-        };
-        newValue = "";
-      })
-      .catch((error) => {
-        alert(error);
-      });
+    // (5) TODO: Handle save todo content when edited.
   };
 
   const handleMarkAsDone = (id) => {
-    const docRef = doc(db, "todos", id);
-    updateDoc(docRef, { isDone: true })
-      .then(() => {
-        const targetIndex = todos.findIndex((todo) => todo.id === id);
-        todos[targetIndex] = {
-          ...todos[targetIndex],
-          isDone: true,
-        };
-      })
-      .catch((error) => {
-        alert(error);
-      });
+    // (6) TODO: Handle mark todo as done.
   };
 
   const handleDelete = (id) => {
-    const docRef = doc(db, "todos", id);
-    deleteDoc(docRef)
-      .then(() => {
-        const filteredToDos = todos.filter((todo) => todo.id !== id);
-        todos = [...filteredToDos];
-      })
-      .catch((error) => {
-        alert(error);
-      });
+    // (7) TODO: Handle delete todo.
   };
 </script>
+
+<!-- THIS BOILERPLATE / UI CODE ARE CREATED AS PART OF THIS WORKSHOP DO NOT EDIT OR MODIFIED THIS CORD BELOW  -->
 
 <div class="min-h-screen flex flex-col items-center justify-center py-12">
   <h1 class="text-xl font-bold">ToDoList App</h1>

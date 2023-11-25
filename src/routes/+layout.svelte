@@ -1,44 +1,29 @@
 <script>
-  // @ts-nocheck
-
   import "../app.css";
 
-  // Init Firebase
-  import app from "$lib/firebase";
+  // (1) TODO: Imports Firebase.
+
+  // (2) TODO: Init Firebase app.
 
   import { onMount } from "svelte";
-  import { isLoggedIn } from "../stores/authStore";
-
-  import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
   import { goto } from "$app/navigation";
 
-  const auth = getAuth();
+  // (3) TODO: Import Svelte AuthStore
+
+  // (4) TODO: Init Firebase auth.
+
   let email = "";
 
   onMount(() => {
-    const auth = getAuth();
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        email = localStorage.getItem("email");
-        isLoggedIn.set(true);
-      } else {
-        isLoggedIn.set(false);
-        goto("/login");
-      }
-    });
+    // (5) TODO: Load current user on page load or redirect to /login if user not loggedIn.
   });
 
   const handleLogout = () => {
-    signOut(auth)
-      .then(() => {
-        localStorage.clear();
-        goto("/login");
-      })
-      .catch((error) => {
-        alert(error);
-      });
+    // (6) TODO: Handle user logout.
   };
 </script>
+
+<!-- THIS BOILERPLATE / UI CODE ARE CREATED AS PART OF THIS WORKSHOP DO NOT EDIT OR MODIFIED THIS CORD BELOW  -->
 
 <main>
   <nav class="py-4 border-b shadow px-6 bg-slate-100 flex flex-row justify-between">
