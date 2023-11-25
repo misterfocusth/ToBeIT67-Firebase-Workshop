@@ -61,6 +61,8 @@
   };
 
   const handleSave = (id) => {
+    if (!newValue) return;
+
     const docRef = doc(db, "todos", id);
     updateDoc(docRef, { content: newValue })
       .then(() => {
@@ -69,6 +71,7 @@
           ...todos[targetIndex],
           content: newValue,
         };
+        newValue = "";
       })
       .catch((error) => {
         alert(error);
